@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { buttonVariants } from '../Button/button';
+import Link from 'next/link';
+import { textVariants } from '../Text/text';
 
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -16,7 +19,7 @@ function useWindowSize() {
     return size;
 }
 
-export default function Header() {
+export default function NavBar() {
     const [isSideMenuExpanded, setIsSideMenuExpanded] = useState(false);
     const [width, height] = useWindowSize();
     const topbarClasses = 'hidden md:flex items-center space-x-4 mr-5';
@@ -74,37 +77,53 @@ export default function Header() {
                             : 'p-4 text-3xl w-full text-center border-t-2 border-t-grey'
                     }
                 >
-                    <a href="#" className="text-white">
-                        Restaurants
-                    </a>
-                </div>
-                <div
-                    className={
-                        !isSideMenuExpanded
-                            ? ''
-                            : 'p-4 text-3xl w-full text-center border-t-2 border-t-grey'
-                    }
-                >
-                    <a href="#" className="text-white">
-                        Dishes
-                    </a>
-                </div>
-                <div
-                    className={
-                        !isSideMenuExpanded
-                            ? ''
-                            : 'p-4 text-3xl w-full text-center border-t-2 border-t-grey'
-                    }
-                >
-                    <button
-                        className={
-                            !isSideMenuExpanded
-                                ? 'outline outline-2 outline-white rounded p-2 text-white'
-                                : 'text-white'
-                        }
+                    <Link
+                        href="/restaurants"
+                        className={textVariants({
+                            variant: 'normal',
+                            align: 'center',
+                            textColour: 'white',
+                            weight: 'normal',
+                        })}
                     >
-                        Log In
-                    </button>
+                        Restaurants
+                    </Link>
+                </div>
+                <div
+                    className={
+                        !isSideMenuExpanded
+                            ? ''
+                            : 'p-4 text-3xl w-full text-center border-t-2 border-t-grey'
+                    }
+                >
+                    <Link
+                        href="/dishes"
+                        className={textVariants({
+                            variant: 'normal',
+                            align: 'center',
+                            textColour: 'white',
+                            weight: 'normal',
+                        })}
+                    >
+                        Dishes
+                    </Link>
+                </div>
+                <div
+                    className={
+                        !isSideMenuExpanded
+                            ? ''
+                            : 'p-4 text-3xl w-full text-center border-t-2 border-t-grey'
+                    }
+                >
+                    <Link
+                        href="/login"
+                        className={buttonVariants({
+                            variant: 'outline',
+                            size: 'sm',
+                        })}
+                    >
+                        Login
+                    </Link>
                 </div>
                 <div
                     className={
@@ -113,15 +132,15 @@ export default function Header() {
                             : 'p-4 text-3xl w-full text-center border-t-2 border-t-grey border-b-2 border-b-grey'
                     }
                 >
-                    <button
-                        className={
-                            !isSideMenuExpanded
-                                ? 'outline outline-2 outline-aqua bg-aqua rounded p-2 text-white'
-                                : 'text-white'
-                        }
+                    <Link
+                        href="/sign-up"
+                        className={buttonVariants({
+                            variant: 'primary',
+                            size: 'sm',
+                        })}
                     >
                         Sign Up
-                    </button>
+                    </Link>
                 </div>
             </div>
         </nav>

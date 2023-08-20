@@ -1,19 +1,32 @@
 import Image from 'next/image';
 import peanut from '../../public/peanuts.svg';
+import { Text } from '@/components/Text/text';
 
 export default function Home() {
     return (
         <main className="flex justify-center">
             <div>
                 <div className="flex flex-row mt-72 justify-center">
-                    <h1 className="text-5xl text-black">AllergEye</h1>
+                    <Text
+                        variant="extremelyHuge"
+                        align="center"
+                        textColour="black"
+                        weight="normal"
+                    >
+                        AllergEye
+                    </Text>
                     <div className="ml-2">
                         <Image priority src={peanut} alt="peanut" />
                     </div>
                 </div>
-                <p className="text-xl">
+                <Text
+                    variant="normal"
+                    align="center"
+                    textColour="black"
+                    weight="normal"
+                >
                     One place for all the allergy information you need!
-                </p>
+                </Text>
             </div>
         </main>
     );
