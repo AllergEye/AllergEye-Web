@@ -11,7 +11,9 @@ const config: Config = {
             colors: {
                 cerulean: '#1C5D99',
                 white: '#FFFAFF',
-                black: '#00120B'
+                black: '#00120B',
+                aqua: '#00C2D1',
+                grey: '#E7E6F7'
             }
         },
     },
