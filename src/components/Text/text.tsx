@@ -6,7 +6,7 @@ const textVariants = cva('text-base text-left text-black font-normal', {
     variants: {
         variant: {
             extremelyHuge: 'text-5xl',
-            veryHuge: 'text-2xl',
+            veryHuge: 'text-3xl',
             huge: 'text-xl',
             large: 'text-lg',
             normal: 'text-base',
