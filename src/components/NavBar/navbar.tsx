@@ -56,7 +56,7 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="bg-cerulean drop-shadow-md flex justify-between h-20">
+        <nav className="bg-cerulean drop-shadow-md flex justify-between h-20 z-50 relative">
             <div className="flex items-center">
                 <div className="text-white text-3xl font-semibold ml-5">
                     AllergEye
