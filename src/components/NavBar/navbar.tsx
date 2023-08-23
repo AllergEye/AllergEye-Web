@@ -12,6 +12,10 @@ export default function NavBar() {
     const [isSideMenuExpanded, setIsSideMenuExpanded] = useState(false);
     const [width, height] = useWindowSize();
 
+    const handleSideMenuExpanded = () => {
+        setIsSideMenuExpanded(!isSideMenuExpanded);
+    };
+
     useEffect(() => {
         if (width >= 768) {
             setIsSideMenuExpanded(false);
@@ -61,9 +65,7 @@ export default function NavBar() {
 
             <div className="inline-flex items-center w-12 justify-between text-white md:hidden mr-5 focus:outline-none focus:ring-2 focus:ring-aqua h-full">
                 <button
-                    onClick={() => {
-                        setIsSideMenuExpanded(!isSideMenuExpanded);
-                    }}
+                    onClick={handleSideMenuExpanded}
                     className="hover:bg-[#2370b8] hover:brightness-75 p-4 rounded"
                 >
                     <span className="sr-only">Open main menu</span>
@@ -83,7 +85,7 @@ export default function NavBar() {
                     'fixed right-0 top-20 w-screen h-[calc(100vh-5rem)] bg-cerulean'
                 }
             >
-                <MobileLinks />
+                <MobileLinks handleSideMenuExpanded={handleSideMenuExpanded} />
             </Transition>
         </nav>
     );

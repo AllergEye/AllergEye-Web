@@ -1,7 +1,14 @@
+import React from 'react';
 import { textVariants } from '@/components/Text/text';
 import Link from 'next/link';
 
-export const MobileLinks = (props: any) => {
+interface MobileLinksProps {
+    handleSideMenuExpanded: () => void;
+}
+
+export const MobileLinks: React.FC<MobileLinksProps> = ({
+    handleSideMenuExpanded,
+}) => {
     const linkContainerClass =
         'w-11/12 text-right hover:brightness-75 hover:bg-[#2370b8] hover:cursor-pointer rounded py-4';
     return (
@@ -16,6 +23,7 @@ export const MobileLinks = (props: any) => {
                         weight: 'normal',
                         className: 'inline-block w-full h-full pr-2',
                     })}
+                    onClick={handleSideMenuExpanded}
                 >
                     Restaurants
                 </Link>
@@ -30,6 +38,7 @@ export const MobileLinks = (props: any) => {
                         weight: 'normal',
                         className: 'inline-block w-full h-full pr-2',
                     })}
+                    onClick={handleSideMenuExpanded}
                 >
                     Dishes
                 </Link>
@@ -44,6 +53,7 @@ export const MobileLinks = (props: any) => {
                         weight: 'normal',
                         className: 'inline-block w-full h-full pr-2',
                     })}
+                    onClick={handleSideMenuExpanded}
                 >
                     Log In
                 </Link>
@@ -58,6 +68,7 @@ export const MobileLinks = (props: any) => {
                         weight: 'normal',
                         className: 'inline-block w-full h-full pr-2',
                     })}
+                    onClick={handleSideMenuExpanded}
                 >
                     Sign Up
                 </Link>
