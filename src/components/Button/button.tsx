@@ -11,6 +11,7 @@ const buttonVariants = cva('outline outline-2 rounded hover:brightness-75', {
         size: {
             default: 'h-10 py-2 px-4',
             sm: 'h-9 px-2',
+            large: 'h-12',
         },
     },
     defaultVariants: {

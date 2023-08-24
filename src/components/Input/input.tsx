@@ -9,9 +9,10 @@ const inputVariants = cva(
         variants: {
             variant: {
                 outlined:
-                    'px-2.5 pb-2.5 pt-4 bg-transparent rounded-lg border-2 ',
-                filled: 'rounded-t-lg px-2.5 pb-2.5 pt-5 border-0 border-b-2',
-                floating: 'py-2.5 px-0 bg-transparent border-0 border-b-2',
+                    'px-2.5 pb-2.5 pt-4 bg-transparent rounded-lg border-2 w-full',
+                filled: 'rounded-t-lg px-2.5 pb-2.5 pt-5 border-0 border-b-2 w-full',
+                floating:
+                    'py-2.5 px-0 bg-transparent border-0 border-b-2 w-full',
             },
             borderColour: {
                 cerulean: 'focus:border-cerulean',
@@ -30,6 +31,13 @@ const inputVariants = cva(
                 black: 'text-black',
                 white: 'text-white',
             },
+            inputWidth: {
+                full: 'w-full',
+                half: 'w-1/2',
+                oneThird: 'w-1/3',
+                twoThirds: 'w-2/3',
+                fiveSixths: 'w-5/6',
+            },
         },
     }
 );
@@ -47,10 +55,16 @@ const Input: React.FC<InputProps> = ({
     labelValue,
     bgColour,
     textColour,
+    inputWidth,
     ...props
 }) => {
     return (
-        <div className="relative z-0">
+        <div
+            className={inputVariants({
+                inputWidth: inputWidth,
+                className: 'relative z-0',
+            })}
+        >
             <input
                 className={cn(
                     inputVariants({

@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import useWindowSize from './hooks/useWindowSize';
+import useWindowSize from '../../lib/hooks/useWindowSize';
 import DesktopLinks from './DesktopLinks';
 import MobileLinks from './MobileLinks';
 import { Transition } from '@headlessui/react';
 import x from '../../../public/x.svg';
+import Link from 'next/link';
+import { textVariants } from '../Text/text';
 
 export default function NavBar() {
     const [isSideMenuExpanded, setIsSideMenuExpanded] = useState(false);
@@ -58,9 +60,17 @@ export default function NavBar() {
     return (
         <nav className="bg-cerulean drop-shadow-md flex justify-between h-20 z-50 relative">
             <div className="flex items-center">
-                <div className="text-white text-3xl font-semibold ml-5">
+                <Link
+                    href="/"
+                    className={textVariants({
+                        textColour: 'white',
+                        variant: 'veryHuge',
+                        weight: 'semibold',
+                        className: 'ml-5',
+                    })}
+                >
                     AllergEye
-                </div>
+                </Link>
             </div>
 
             <div className="inline-flex items-center w-12 justify-between text-white md:hidden mr-5 focus:outline-none focus:ring-2 focus:ring-aqua h-full">
