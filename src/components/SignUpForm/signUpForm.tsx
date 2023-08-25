@@ -1,13 +1,52 @@
 'use client';
 
+import { FormEvent, useState } from 'react';
 import { Button, buttonVariants } from '@/components/Button/button';
 import { Input } from '@/components/Input/input';
 import { Text } from '@/components/Text/text';
 import useWindowSize from '@/lib/hooks/useWindowSize';
+import { useMutation } from '@tanstack/react-query';
+import { request, gql } from 'graphql-request';
 import Link from 'next/link';
+
+interface SignUpData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
 
 export const SignUpForm = () => {
     const [width, height] = useWindowSize();
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+
+    const mutation = useMutation({
+        mutationKey: ['signUp'],
+        mutationFn: async (signUpData: SignUpData) => {
+            const createUserMutation = gql`
+            mutation {
+                createUser(input: {
+                    firstName: ${signUpData.firstName},
+                    lastName: ${signUpData.lastName},
+                    email: ${signUpData.email},
+                    password: ${signUpData.password}
+                }) {
+                    accessToken,
+                    refreshToken
+                }
+            }
+        `;
+            request(
+                'https://epinephrine-service-bbgxeko6ga-uc.a.run.app/',
+                createUserMutation
+            );
+        },
+    });
+
     return (
         <div className="flex flex-col rounded bg-cerulean my-24 md:w-3/5 drop-shadow-2xl">
             <Text
@@ -27,7 +66,17 @@ export const SignUpForm = () => {
                 Sign up to AllergEye and start adding restaurants and dishes
                 today!
             </Text>
-            <form>
+            <form
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    mutation.mutate({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                    });
+                }}
+            >
                 <div className="flex-col mt-6 w-full">
                     <Text
                         variant="huge"
@@ -50,6 +99,7 @@ export const SignUpForm = () => {
                             inputWidth={
                                 width >= 640 ? 'oneThird' : 'fiveSixths'
                             }
+                            onChange={(e) => setFirstName(e.target.value)}
                         />
                         <Input
                             variant="outlined"
@@ -62,6 +112,7 @@ export const SignUpForm = () => {
                             inputWidth={
                                 width >= 640 ? 'oneThird' : 'fiveSixths'
                             }
+                            onChange={(e) => setLastName(e.target.value)}
                         />
                     </div>
                 </div>
@@ -84,6 +135,7 @@ export const SignUpForm = () => {
                         borderColour="aqua"
                         textColour="white"
                         inputWidth="fiveSixths"
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div>
@@ -109,6 +161,7 @@ export const SignUpForm = () => {
                                 width >= 640 ? 'oneThird' : 'fiveSixths'
                             }
                             type="password"
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <Input
                             variant="outlined"
@@ -122,6 +175,7 @@ export const SignUpForm = () => {
                                 width >= 640 ? 'oneThird' : 'fiveSixths'
                             }
                             type="password"
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
                 </div>
@@ -144,6 +198,7 @@ export const SignUpForm = () => {
                     Log In
                 </Link>
             </div>
+            {mutation.isError ? <div>An error occurred</div> : null}
         </div>
     );
 };
